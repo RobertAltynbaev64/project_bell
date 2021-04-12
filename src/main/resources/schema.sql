@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS Office (
 );
 COMMENT ON TABLE Office IS 'Офис';
 
-CREATE INDEX IX_Office_Org_id ON Office (organization_id);
 ALTER TABLE Office ADD FOREIGN KEY (organization_id) REFERENCES Organization(id);
 
 CREATE TABLE IF NOT EXISTS User (
@@ -42,7 +41,6 @@ CREATE TABLE IF NOT EXISTS User (
 );
 COMMENT ON TABLE User IS 'Пользователь';
 
-CREATE INDEX IX_User_Office_id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
 CREATE TABLE IF NOT EXISTS Document (
@@ -55,7 +53,6 @@ CREATE TABLE IF NOT EXISTS Document (
 );
 COMMENT ON TABLE Document IS 'Документ пользователя';
 
-CREATE INDEX IX_Document_User_id ON Document (user_id);
 ALTER TABLE Document ADD FOREIGN KEY (user_id) REFERENCES User(id);
 
 CREATE TABLE IF NOT EXISTS Document_type (
@@ -67,7 +64,6 @@ CREATE TABLE IF NOT EXISTS Document_type (
 );
 COMMENT ON TABLE Document_type IS 'Справочник документов';
 
-CREATE INDEX IX_Document_type_id ON Document_type (id);
 ALTER TABLE Document ADD FOREIGN KEY (document_type_id) REFERENCES Document_type(id);
 
 CREATE TABLE IF NOT EXISTS Country (
@@ -79,5 +75,4 @@ CREATE TABLE IF NOT EXISTS Country (
 );
 COMMENT ON TABLE Country IS 'Справочник стран';
 
-CREATE INDEX IX_User_Country_id ON User (country_id);
 ALTER TABLE User ADD FOREIGN KEY (country_id) REFERENCES Country(id);
