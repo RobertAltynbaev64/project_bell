@@ -1,7 +1,7 @@
 package project.altynbaev.user.model;
 
-import project.altynbaev.handbook.country.model.Country;
-import project.altynbaev.handbook.country.doc.model.Document;
+import project.altynbaev.dictionary.country.model.Country;
+import project.altynbaev.dictionary.doc.model.Document;
 
 import javax.persistence.*;
 
