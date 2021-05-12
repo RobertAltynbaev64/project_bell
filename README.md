@@ -4,8 +4,7 @@
 Запуск проекта: 
 
 1. через _main_ метод, который располагается в
-    _project_bell\src\main\java\project\khusainov\KhusainovApplication.java_
-
+    _demo\src\main\java\project\altynbaev\AltynbaevApplication.java
 2. через maven, командой 
     `mvn spring-boot:run`
 
