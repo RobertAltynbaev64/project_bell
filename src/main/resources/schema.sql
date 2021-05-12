@@ -1,78 +1,74 @@
-CREATE TABLE IF NOT EXISTS Organization (
-    id              LONG                     COMMENT 'Уникальный идентификатор организации' PRIMARY KEY AUTO_INCREMENT ,
-    version         INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-    name            VARCHAR(50) NOT NULL     COMMENT 'Краткое название организации',
-    full_name       VARCHAR(100) NOT NULL    COMMENT 'Полное название организации',
-    inn             VARCHAR(11) NOT NULL     COMMENT 'ИНН организации',
-    kpp             VARCHAR(12) NOT NULL     COMMENT 'КПП организации',
-    address         VARCHAR(100) NOT NULL    COMMENT 'Адрес организации',
-    phone           VARCHAR(18)              COMMENT 'Телефон организации',
-    is_active       BOOLEAN                  COMMENT 'Активность организации'
-
+CREATE TABLE organization (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version    INTEGER NOT NULL,
+    name VARCHAR(40) NOT NULL,
+    full_name VARCHAR(100) NOT NULL,
+    inn VARCHAR(10) NOT NULL,
+    kpp VARCHAR(9) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    phone VARCHAR(11),
+    is_active BIT
 );
-COMMENT ON TABLE Organization IS 'Организация';
 
-CREATE TABLE IF NOT EXISTS Office (
-    id              LONG                     COMMENT 'Уникальный идентификатор офиса' PRIMARY KEY AUTO_INCREMENT ,
-    version         INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-    organization_id LONG NOT NULL            COMMENT 'Уникальный идентификатор организации',
-    name            VARCHAR(40)              COMMENT 'Название офиса',
-    address         VARCHAR(100)             COMMENT 'Адрес офиса',
-    phone           VARCHAR(18)              COMMENT 'Телефон офиса',
-    is_active       BOOLEAN                  COMMENT 'Активность офиса'
+CREATE INDEX IX_organization_name ON organization (name);
 
+CREATE TABLE office (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    version INTEGER NOT NULL,
+    org_id INT NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    phone VARCHAR(11),
+    is_active BIT,
+    FOREIGN KEY(org_id) REFERENCES organization(id)
 );
-COMMENT ON TABLE Office IS 'Офис';
 
-ALTER TABLE Office ADD FOREIGN KEY (organization_id) REFERENCES Organization(id);
+CREATE INDEX IX_office_org_id ON office(org_id);
 
-CREATE TABLE IF NOT EXISTS User (
-    id              LONG                     COMMENT 'Уникальный идентификатор пользователя' PRIMARY KEY AUTO_INCREMENT ,
-    version         LONG NOT NULL            COMMENT 'Служебное поле hibernate',
-    office_id       LONG NOT NULL            COMMENT 'Уникальный идентификатор офиса',
-    first_name      VARCHAR(15) NOT NULL     COMMENT 'Имя пользователя',
-    second_name     VARCHAR(15)              COMMENT 'Фамилия пользователя',
-    middle_name     VARCHAR(15)              COMMENT 'Отчество пользователя',
-    position        VARCHAR(20) NOT NULL     COMMENT 'Должность пользователя',
-    phone           VARCHAR(18)              COMMENT 'Телефон организации',
-    country_id      LONG                     COMMENT 'Служебное поле hibernate',
-    is_identified   BOOLEAN                  COMMENT 'Определение пользователя'
 
+CREATE TABLE doc (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    doc_name VARCHAR (50),
+    doc_code VARCHAR (10)
 );
-COMMENT ON TABLE User IS 'Пользователь';
 
-ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
+CREATE INDEX IX_doc_doc_code ON doc(doc_code);
 
-CREATE TABLE IF NOT EXISTS Document (
-     user_id         LONG                     COMMENT 'Уникальный идентификатор пользователя' PRIMARY KEY,
-     version         INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-     document_type_id LONG                    COMMENT 'Идентификатор типа документа',
-     doc_number      VARCHAR(20)              COMMENT 'Номер документа',
-     doc_date        DATE                     COMMENT 'Дата выдачи документа'
-
+CREATE TABLE country (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    country_name VARCHAR (50),
+    country_code VARCHAR (10)
 );
-COMMENT ON TABLE Document IS 'Документ пользователя';
 
-ALTER TABLE Document ADD FOREIGN KEY (user_id) REFERENCES User(id);
+CREATE INDEX IX_country_country_code ON country(country_code);
 
-CREATE TABLE IF NOT EXISTS Document_type (
-     id              LONG                     COMMENT 'Уникальный идентификатор (суррогатный ключ)' PRIMARY KEY AUTO_INCREMENT,
-     version         INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-     doc_code        INTEGER                  COMMENT 'Код документа',
-     doc_name        VARCHAR(100)             COMMENT 'Название документа'
 
+
+
+CREATE TABLE user (
+                      id INT AUTO_INCREMENT PRIMARY KEY,
+                      version INTEGER NOT NULL,
+                      first_name VARCHAR(30) NOT NULL,
+                      second_name VARCHAR(30),
+                      middle_name VARCHAR(30),
+                      position VARCHAR(30) NOT NULL,
+                      phone VARCHAR(11),
+                      is_identified BIT,
+                      office_id INT,
+                      country_id INT,
+                      FOREIGN KEY(office_id) REFERENCES office(id),
+                      FOREIGN KEY(country_id) REFERENCES country(id)
 );
-COMMENT ON TABLE Document_type IS 'Справочник документов';
 
-ALTER TABLE Document ADD FOREIGN KEY (document_type_id) REFERENCES Document_type(id);
+CREATE INDEX IX_user_office_id ON user(office_id);
 
-CREATE TABLE IF NOT EXISTS Country (
-    id              LONG                     COMMENT 'Уникальный идентификатор (суррогатный ключ)' PRIMARY KEY AUTO_INCREMENT,
-    version         INTEGER NOT NULL         COMMENT 'Служебное поле hibernate',
-    country_code    INTEGER                  COMMENT 'Код страны',
-    country_name    VARCHAR(50)              COMMENT 'Название страны'
 
+CREATE TABLE document (
+                          id INT NOT NULL UNIQUE,
+                          version INTEGER NOT NULL,
+                          document_number VARCHAR (30),
+                          document_date DATE,
+                          doc_id INT,
+                          FOREIGN KEY(doc_id) REFERENCES doc(id),
+                          FOREIGN KEY(id) REFERENCES user(id)
 );
-COMMENT ON TABLE Country IS 'Справочник стран';
-
-ALTER TABLE User ADD FOREIGN KEY (country_id) REFERENCES Country(id);
