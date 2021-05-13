@@ -45,8 +45,12 @@ public class OfficeServiceImpl implements OfficeService {
     @Transactional
     @Override
     public void update(OfficeUpdateAndGetDto officeUpdateAndGetDTO) {
+        Office officefromDB = officeDao.findById(officeUpdateAndGetDTO.getId());
         Office office = mapperFacade.map(officeUpdateAndGetDTO, Office.class);
-        officeDao.update(office, officeUpdateAndGetDTO.getId());
+        officefromDB.setActive(office.isActive());
+        officefromDB.setAddress(office.getAddress());
+        officefromDB.setName(office.getName());
+        officefromDB.setPhone(office.getPhone());
     }
 
     @Transactional

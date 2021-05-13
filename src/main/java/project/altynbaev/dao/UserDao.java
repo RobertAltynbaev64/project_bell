@@ -10,8 +10,6 @@ public interface UserDao {
 
     void save(User user);
 
-    void update(User user, int id);
-
     List<User> filter(User user, int docCode);
 
 }

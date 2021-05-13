@@ -43,15 +43,20 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public void update(OrganizationUpdateAndGetDto organizationUpdateDTO) {
         Organization organization = mapperFacade.map(organizationUpdateDTO, Organization.class);
-        organizationDao.update(organization, organizationUpdateDTO.getId());
+        Organization organizationFromDB = organizationDao.findById(organizationUpdateDTO.getId());
+        organizationFromDB.setName(organization.getName());
+        organizationFromDB.setFullName(organization.getFullName());
+        organizationFromDB.setActive(organization.isActive());
+        organizationFromDB.setAddress(organization.getAddress());
+        organizationFromDB.setInn(organization.getInn());
+        organizationFromDB.setPhone(organization.getPhone());
+        organizationFromDB.setKpp(organization.getKpp());
     }
-
 
     @Transactional
     @Override
     public List<OrganizationFilterOutDto> filter(OrganizationFilterInDto organizationFilterDTO) {
-        Organization organization = mapperFacade.map(organizationFilterDTO, Organization.class);
-        List<Organization> list = organizationDao.filter(organization);
+        List<Organization> list = organizationDao.filter(organizationFilterDTO);
         return mapperFacade.mapAsList(list, OrganizationFilterOutDto.class);
     }
 }

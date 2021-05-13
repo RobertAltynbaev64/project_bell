@@ -31,18 +31,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void update(User user, int id) {
-        User userFromDB = em.find(User.class, id);
-        userFromDB.setOffice(user.getOffice());
-        userFromDB.setFirstName(user.getFirstName());
-        userFromDB.setSecondName(user.getSecondName());
-        userFromDB.setMiddleName(user.getMiddleName());
-        userFromDB.setPosition(user.getPosition());
-        userFromDB.setPhone(user.getPhone());
-        userFromDB.setIdentified(user.isIdentified());
-    }
-
-    @Override
     public List<User> filter(User user, int docCode) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> orgCriteria = cb.createQuery(User.class);

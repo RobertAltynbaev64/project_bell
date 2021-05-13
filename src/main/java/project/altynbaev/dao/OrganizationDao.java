@@ -1,5 +1,6 @@
 package project.altynbaev.dao;
 
+import project.altynbaev.dto.organization.OrganizationFilterInDto;
 import project.altynbaev.model.Organization;
 
 import java.util.List;
@@ -10,8 +11,6 @@ public interface OrganizationDao {
 
     void save(Organization organization);
 
-    void update(Organization organization, int id);
-
-    List<Organization> filter(Organization organization);
+    List<Organization> filter(OrganizationFilterInDto organization);
 
 }

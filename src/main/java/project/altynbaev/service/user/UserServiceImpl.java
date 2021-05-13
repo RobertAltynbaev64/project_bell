@@ -12,7 +12,7 @@ import project.altynbaev.model.User;
 import java.util.List;
 
 @Service
-public class UserServiceImpl implements UserService  {
+public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final OfficeDao officeDao;
@@ -63,13 +63,20 @@ public class UserServiceImpl implements UserService  {
     @Override
     public void update(UserUpdateDto userUpdateDTO) {
         User user = mapperFacade.map(userUpdateDTO, User.class);
+        User userFromDB = userDao.findById(userUpdateDTO.getId());
         user.setOffice(officeDao.findById(userUpdateDTO.getOfficeId()));
         Document document = documentDao.findById(userUpdateDTO.getId());
         document.setDoc(docRepository.findByDocName(userUpdateDTO.getDocName()).get());
         document.setDocumentNumber(userUpdateDTO.getDocNumber());
         document.setDocumentDate(userUpdateDTO.getDocDate());
         user.setCountry(countryRepository.findByCountryCode(userUpdateDTO.getCitizenshipCode()).get());
-        userDao.update(user, userUpdateDTO.getId());
+        userFromDB.setOffice(user.getOffice());
+        userFromDB.setFirstName(user.getFirstName());
+        userFromDB.setSecondName(user.getSecondName());
+        userFromDB.setMiddleName(user.getMiddleName());
+        userFromDB.setPosition(user.getPosition());
+        userFromDB.setPhone(user.getPhone());
+        userFromDB.setIdentified(user.isIdentified());
     }
 
     @Transactional
@@ -84,5 +91,4 @@ public class UserServiceImpl implements UserService  {
 
         return mapperFacade.mapAsList(list, UserFilterOutDto.class);
     }
-
 }

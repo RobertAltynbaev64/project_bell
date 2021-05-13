@@ -8,26 +8,18 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ControllerAdvice
 public class DefaultAdvice {
 
-    private static Logger log = Logger.getLogger(DefaultAdvice.class.getName());
-
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ResponseDto> handleNullPointerException(Exception e) {
-        UUID id1 = UUID.randomUUID();
-        log.log(Level.INFO, id1 + " Exception: ", e);
-        ResponseDto response = new ResponseDto(id1 + " " + e.getMessage());
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
+    private static final Logger log = LoggerFactory.getLogger(DefaultAdvice.class.getName());
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseDto> handleAllException(Exception e) {
         UUID id1 = UUID.randomUUID();
-        log.log(Level.INFO, id1 + " Exception: ", e);
+        log.error(id1 + " Exception: ", e);
         ResponseDto response = new ResponseDto(id1 + " " + e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -35,7 +27,7 @@ public class DefaultAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDto> handleHttpClientErrorException(Exception e) {
         UUID id1 = UUID.randomUUID();
-        log.log(Level.INFO, id1 + " Exception: ", e);
+        log.error(id1 + " Exception: ", e);
         ResponseDto response = new ResponseDto(id1 + " " + e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

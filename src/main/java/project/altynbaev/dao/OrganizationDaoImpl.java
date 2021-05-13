@@ -2,6 +2,7 @@ package project.altynbaev.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import project.altynbaev.dto.organization.OrganizationFilterInDto;
 import project.altynbaev.model.Organization;
 
 import javax.persistence.EntityManager;
@@ -31,19 +32,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     @Override
-    public void update(Organization organization, int id) {
-        Organization organizationFromDB = em.find(Organization.class, id);
-        organizationFromDB.setName(organization.getName());
-        organizationFromDB.setFullName(organization.getFullName());
-        organizationFromDB.setActive(organization.isActive());
-        organizationFromDB.setAddress(organization.getAddress());
-        organizationFromDB.setInn(organization.getInn());
-        organizationFromDB.setPhone(organization.getPhone());
-        organizationFromDB.setKpp(organization.getKpp());
-    }
-
-    @Override
-    public List<Organization> filter(Organization organization) {
+    public List<Organization> filter(OrganizationFilterInDto organization) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Organization> orgCriteria = cb.createQuery(Organization.class);
         Root<Organization> orgRoot = orgCriteria.from(Organization.class);

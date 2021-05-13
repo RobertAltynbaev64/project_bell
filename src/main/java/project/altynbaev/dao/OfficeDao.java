@@ -12,6 +12,4 @@ public interface OfficeDao {
 
     void save(Office office);
 
-    void update(Office office, int id);
-
 }
