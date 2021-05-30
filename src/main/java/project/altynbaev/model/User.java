@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Version
     private Integer version = 0;
@@ -27,7 +27,7 @@ public class User {
     private String position;
 
     @Column(name = "phone", length = 11)
-    private Long phone;
+    private String phone;
 
     @Column(name = "is_identified")
     private Boolean isIdentified;
@@ -40,11 +40,11 @@ public class User {
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @OneToOne
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Document document;
 
 
-    public User(int id, String firstName, String secondName, String middleName, String position, Long phone, Boolean isIdentified, Office office, Country country, Document document) {
+    public User(Integer id, String firstName, String secondName, String middleName, String position, String phone, Boolean isIdentified, Office office, Country country, Document document) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -60,8 +60,12 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -96,11 +100,11 @@ public class User {
         this.position = position;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

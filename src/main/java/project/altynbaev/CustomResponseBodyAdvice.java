@@ -20,16 +20,13 @@ public class CustomResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        Data data;
-        ResultDto resultDto;
+
         if (o == null) {
             return new Data(new ResultDto());
         }
-        if(o.getClass() == ResponseDto.class){
+        if (o.getClass() == ResponseDto.class) {
             return o;
-        }
-        else
+        } else
             return new Data(o);
     }
-
 }

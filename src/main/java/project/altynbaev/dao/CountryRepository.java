@@ -12,5 +12,4 @@ public interface CountryRepository extends JpaRepository<Country, Integer> {
     Optional<Country> findById(int id);
 
     Optional<Country> findByCountryCode(int countryCode);
-
 }

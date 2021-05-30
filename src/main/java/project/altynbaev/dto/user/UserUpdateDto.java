@@ -24,7 +24,7 @@ public class UserUpdateDto {
     @NotBlank
     private String position;
 
-    private Long phone;
+    private String phone;
 
     private String docName;
 
@@ -36,7 +36,7 @@ public class UserUpdateDto {
 
     private Boolean isIdentified;
 
-    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
+    public UserUpdateDto(int id, int officeId, String firstName, String secondName, String middleName, String position, String phone, String docName, Long docNumber, Date docDate, int citizenshipCode, Boolean isIdentified) {
         this.id = id;
         this.officeId = officeId;
         this.firstName = firstName;
@@ -102,11 +102,11 @@ public class UserUpdateDto {
         this.position = position;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

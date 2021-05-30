@@ -1,10 +1,12 @@
 package project.altynbaev.controller;
 
+import project.altynbaev.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.altynbaev.dto.user.*;
 import project.altynbaev.service.user.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,22 +21,24 @@ public class UserController {
     }
 
     @PostMapping("list")
-    public List<UserFilterOutDto> filter(@RequestBody UserFilterInDto userFilterInDTO) {
+    public List<UserFilterOutDto> filter(@RequestBody @Valid UserFilterInDto userFilterInDTO) {
         return userService.filter(userFilterInDTO);
     }
 
     @GetMapping("{id}")
     public UserGetDto getUser(@PathVariable int id) {
-        return userService.findById(id);
+        if (userService.findById(id) != null) {
+            return userService.findById(id);
+        } else throw new NotFoundException("Не найден пользователь с id = " + id);
     }
 
     @PostMapping("save")
-    public void saveUser(@RequestBody UserSaveDto userSaveDTO) {
+    public void saveUser(@RequestBody @Valid UserSaveDto userSaveDTO) {
         userService.save(userSaveDTO);
     }
 
     @PostMapping("update")
-    public void updateUser(@RequestBody UserUpdateDto userUpdateDTO) {
+    public void updateUser(@RequestBody @Valid UserUpdateDto userUpdateDTO) {
         userService.update(userUpdateDTO);
     }
 }

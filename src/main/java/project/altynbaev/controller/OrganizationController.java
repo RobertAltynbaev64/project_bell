@@ -1,5 +1,6 @@
 package project.altynbaev.controller;
 
+import project.altynbaev.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.altynbaev.dto.organization.OrganizationFilterInDto;
@@ -8,6 +9,7 @@ import project.altynbaev.dto.organization.OrganizationSaveDto;
 import project.altynbaev.dto.organization.OrganizationUpdateAndGetDto;
 import project.altynbaev.service.organization.OrganizationService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,22 +24,24 @@ public class OrganizationController {
     }
 
     @PostMapping("list")
-    public List<OrganizationFilterOutDto> filter(@RequestBody OrganizationFilterInDto organizationFilterInDTO) {
+    public List<OrganizationFilterOutDto> filter(@RequestBody @Valid OrganizationFilterInDto organizationFilterInDTO) {
         return organizationService.filter(organizationFilterInDTO);
     }
 
     @GetMapping("{id}")
     public OrganizationUpdateAndGetDto getOrg(@PathVariable int id) {
-        return organizationService.findById(id);
+        if (organizationService.findById(id) != null) {
+            return organizationService.findById(id);
+        } else throw new NotFoundException("Не найдена организация с id = " + id);
     }
 
     @PostMapping("save")
-    public void saveOrg(@RequestBody OrganizationSaveDto organizationSaveDTO) {
+    public void saveOrg(@RequestBody @Valid OrganizationSaveDto organizationSaveDTO) {
         organizationService.save(organizationSaveDTO);
     }
 
     @PostMapping("update")
-    public void updateOrg(@RequestBody OrganizationUpdateAndGetDto organizationUpdateAndGetDTO) {
+    public void updateOrg(@RequestBody @Valid OrganizationUpdateAndGetDto organizationUpdateAndGetDTO) {
         organizationService.update(organizationUpdateAndGetDTO);
     }
 }

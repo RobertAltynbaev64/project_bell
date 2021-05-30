@@ -6,10 +6,9 @@ import java.util.Date;
 @Entity
 @Table(name = "document")
 public class Document {
-
     @Id
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Version
     private Integer version = 0;
@@ -39,11 +38,11 @@ public class Document {
     public Document() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -78,5 +77,4 @@ public class Document {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

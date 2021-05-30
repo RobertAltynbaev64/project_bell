@@ -12,7 +12,6 @@ INSERT INTO office (id, version, org_id, name, address, phone, is_active) VALUES
 (4, 0, 1, 'Четвертый', 'Тверь', 89014444444, 1),
 (5, 0, 2, 'Пятый', 'Москва', 89673333333, 0);
 
-
 INSERT INTO doc (id, doc_name, doc_code) VALUES
 (1, 'Паспорт гражданина РФ', 21),
 (2, 'Паспорт гражданина Украины', 20),

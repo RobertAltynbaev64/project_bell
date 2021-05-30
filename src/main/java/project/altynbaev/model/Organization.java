@@ -5,11 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "organization")
 public class Organization {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Version
     private Integer version = 0;
@@ -21,21 +20,21 @@ public class Organization {
     private String fullName;
 
     @Column(name = "inn", length = 10, nullable = false)
-    private Long inn;
+    private String inn;
 
     @Column(name = "kpp", length = 9, nullable = false)
-    private Long kpp;
+    private String kpp;
 
     @Column(name = "address", length = 100, nullable = false)
     private String address;
 
     @Column(name = "phone", length = 11)
-    private Long phone;
+    private String phone;
 
     @Column(name = "is_active")
     private Boolean isActive;
 
-    public Organization(int id, String name, String fullName, Long inn, Long kpp, String address, Long phone, Boolean isActive) {
+    public Organization(Integer id, String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.fullName = fullName;
@@ -49,11 +48,11 @@ public class Organization {
     public Organization() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,19 +72,19 @@ public class Organization {
         this.fullName = fullName;
     }
 
-    public Long getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(Long inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 
-    public Long getKpp() {
+    public String getKpp() {
         return kpp;
     }
 
-    public void setKpp(Long kpp) {
+    public void setKpp(String kpp) {
         this.kpp = kpp;
     }
 
@@ -97,11 +96,11 @@ public class Organization {
         this.address = address;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -9,11 +9,11 @@ public class OrganizationFilterInDto {
     @NotBlank
     private String name;
 
-    private Long inn;
+    private String inn;
 
     private Boolean isActive;
 
-    public OrganizationFilterInDto(String name, Long inn, Boolean isActive) {
+    public OrganizationFilterInDto(String name, String inn, Boolean isActive) {
         this.name = name;
         this.inn = inn;
         this.isActive = isActive;
@@ -30,11 +30,11 @@ public class OrganizationFilterInDto {
         this.name = name;
     }
 
-    public Long getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(Long inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 

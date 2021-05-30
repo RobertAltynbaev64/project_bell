@@ -5,11 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "country")
 public class Country {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "country_name", length = 50)
     private String countryName;
@@ -25,11 +24,11 @@ public class Country {
     public Country() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

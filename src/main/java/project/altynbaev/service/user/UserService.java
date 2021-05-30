@@ -9,10 +9,10 @@ public interface UserService {
 
     UserGetDto findById(int id);
 
-    void save(@Valid UserSaveDto userSaveDTO);
+    void save(UserSaveDto userSaveDTO);
 
-    void update(@Valid UserUpdateDto userUpdateDTO);
+    void update(UserUpdateDto userUpdateDTO);
 
-    List<UserFilterOutDto> filter(@Valid UserFilterInDto userFilterInDTO);
+    List<UserFilterOutDto> filter(UserFilterInDto userFilterInDTO);
 
 }

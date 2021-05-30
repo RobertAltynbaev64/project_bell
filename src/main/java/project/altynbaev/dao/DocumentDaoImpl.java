@@ -31,5 +31,6 @@ public class DocumentDaoImpl implements DocumentDao {
         Document documentfromDB = em.find(Document.class, document.getId());
         documentfromDB.setDocumentNumber(document.getDocumentNumber());
         documentfromDB.setDocumentDate(document.getDocumentDate());
+        em.persist(documentfromDB);
     }
 }

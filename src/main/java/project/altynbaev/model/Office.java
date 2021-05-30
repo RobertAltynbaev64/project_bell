@@ -5,11 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "office")
 public class Office {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Version
     private Integer version = 0;
@@ -21,7 +20,7 @@ public class Office {
     private String address;
 
     @Column(name = "phone", length = 11)
-    private Long phone;
+    private String phone;
 
     @Column(name = "is_active")
     private Boolean isActive;
@@ -30,7 +29,7 @@ public class Office {
     @JoinColumn(name = "org_id")
     private Organization organization;
 
-    public Office(int id, String name, String address, Long phone, Boolean isActive, Organization organization) {
+    public Office(Integer id, String name, String address, String phone, Boolean isActive, Organization organization) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -42,11 +41,11 @@ public class Office {
     public Office() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -66,11 +65,11 @@ public class Office {
         this.address = address;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -89,5 +88,4 @@ public class Office {
     public void setOrganization(Organization organization) {
         this.organization = organization;
     }
-
 }

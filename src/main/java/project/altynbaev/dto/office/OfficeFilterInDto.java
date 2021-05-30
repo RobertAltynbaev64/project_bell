@@ -9,11 +9,11 @@ public class OfficeFilterInDto {
 
     private String name;
 
-    private Long phone;
+    private String phone;
 
     private Boolean isActive;
 
-    public OfficeFilterInDto(int orgId, String name, Long phone, Boolean isActive) {
+    public OfficeFilterInDto(int orgId, String name, String phone, Boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.phone = phone;
@@ -39,11 +39,11 @@ public class OfficeFilterInDto {
         this.name = name;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

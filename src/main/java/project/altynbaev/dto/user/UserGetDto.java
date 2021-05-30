@@ -14,11 +14,11 @@ public class UserGetDto {
 
     private String position;
 
-    private Long phone;
+    private String phone;
 
     private String docName;
 
-    private Long docNumber;
+    private long docNumber;
 
     private Date docDate;
 
@@ -28,7 +28,7 @@ public class UserGetDto {
 
     private Boolean isIdentified;
 
-    public UserGetDto(int id, String firstName, String secondName, String middleName, String position, Long phone, String docName, Long docNumber, Date docDate, String citizenshipName, int citizenshipCode, Boolean isIdentified) {
+    public UserGetDto(int id, String firstName, String secondName, String middleName, String position, String phone, String docName, long docNumber, Date docDate, String citizenshipName, int citizenshipCode, Boolean isIdentified) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -86,11 +86,11 @@ public class UserGetDto {
         this.position = position;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -102,11 +102,11 @@ public class UserGetDto {
         this.docName = docName;
     }
 
-    public Long getDocNumber() {
+    public long getDocNumber() {
         return docNumber;
     }
 
-    public void setDocNumber(Long docNumber) {
+    public void setDocNumber(long docNumber) {
         this.docNumber = docNumber;
     }
 

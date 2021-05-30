@@ -16,21 +16,21 @@ public class OrganizationSaveDto {
 
     @Size(max = 10)
     @NotNull
-    private Long inn;
+    private String inn;
 
     @Size(max = 9)
     @NotNull
-    private Long kpp;
+    private String kpp;
 
     @Size(max = 100)
     @NotBlank
     private String address;
 
-    private Long phone;
+    private String phone;
 
     private Boolean isActive;
 
-    public OrganizationSaveDto(String name, String fullName, Long inn, Long kpp, String address, Long phone, Boolean isActive) {
+    public OrganizationSaveDto(String name, String fullName, String inn, String kpp, String address, String phone, Boolean isActive) {
         this.name = name;
         this.fullName = fullName;
         this.inn = inn;
@@ -59,19 +59,19 @@ public class OrganizationSaveDto {
         this.fullName = fullName;
     }
 
-    public Long getInn() {
+    public String getInn() {
         return inn;
     }
 
-    public void setInn(Long inn) {
+    public void setInn(String inn) {
         this.inn = inn;
     }
 
-    public Long getKpp() {
+    public String getKpp() {
         return kpp;
     }
 
-    public void setKpp(Long kpp) {
+    public void setKpp(String kpp) {
         this.kpp = kpp;
     }
 
@@ -83,11 +83,11 @@ public class OrganizationSaveDto {
         this.address = address;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

@@ -11,6 +11,7 @@ public interface OrganizationDao {
 
     void save(Organization organization);
 
-    List<Organization> filter(OrganizationFilterInDto organization);
+    void update(Organization organization, int id);
 
+    List<Organization> filter(OrganizationFilterInDto organizationFilterInDto);
 }

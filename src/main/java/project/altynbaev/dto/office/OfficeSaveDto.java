@@ -1,21 +1,27 @@
 package project.altynbaev.dto.office;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class OfficeSaveDto {
 
     @NotNull
     private int orgId;
 
+    @Size(max = 30)
+    @NotBlank
     private String name;
 
+    @Size(max = 100)
+    @NotBlank
     private String address;
 
-    private Long phone;
+    private String phone;
 
     private Boolean isActive;
 
-    public OfficeSaveDto(int orgId, String name, String address, Long phone, Boolean isActive) {
+    public OfficeSaveDto(int orgId, String name, String address, String phone, Boolean isActive) {
         this.orgId = orgId;
         this.name = name;
         this.address = address;
@@ -50,11 +56,11 @@ public class OfficeSaveDto {
         this.address = address;
     }
 
-    public Long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -65,5 +71,4 @@ public class OfficeSaveDto {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
 }
